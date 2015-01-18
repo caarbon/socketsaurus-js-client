@@ -1,7 +1,8 @@
 (function() {
   var slice = Array.prototype.slice;
   var trailingSlash = /\/$/;
-  var beginningDot = /^\/./;
+  var leadingSlash = /^\//;
+  var leadingDot = /^\./;
   var exposedEventsNoArg = [
     'connect',
     'connecting',
@@ -22,7 +23,7 @@
     var self = this;
     var notation = path.split('.');
 
-    this.nsp = notation.shift();
+    this.nsp = notation.shift().replace(leadingSlash, '');
     this.uri = uri;
     this.opts = opts;
     this.path = notation.join('.');
@@ -66,7 +67,7 @@
         return;
       }
 
-      for (var i = 0; i < self.events[name]; i++) {
+      for (var i = 0; i < self.events[name].length; i++) {
         self.events[name][i].apply(self, args);
       }
     }
@@ -129,7 +130,7 @@
    * @return {Object}         New reference instance
    */
   Ref.prototype.child = function(subpath) {
-    subpath = subpath.trim().replace(beginningDot, '');
+    subpath = subpath.trim().replace(leadingDot, '');
     return new Ref(this.uri, this.opts, this.path ? this.path + '.' + subpath : subpath);
   };
 
@@ -145,7 +146,7 @@
     uri = uri.trim().replace(trailingSlash, '');
 
     return function(path) {
-      path = path.trim().replace(beginningDot, '');
+      path = path.trim().replace(leadingDot, '');
       return new Ref(uri, opts, path);
     };
   }
