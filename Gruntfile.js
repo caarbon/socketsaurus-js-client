@@ -8,7 +8,8 @@ module.exports = function(grunt) {
         src: [
           '**/*.js',
           '!node_modules/**',
-          '!ignore/**'
+          '!ignore/**',
+          '!Gruntfile.js'
         ],
         options: {
           jshintrc: true
@@ -19,7 +20,8 @@ module.exports = function(grunt) {
       src: [
         '**/*.js',
         '!node_modules/**',
-        '!ignore/**'
+        '!ignore/**',
+        '!Gruntfile.js'
       ],
       options: {
         config: '.jscsrc'

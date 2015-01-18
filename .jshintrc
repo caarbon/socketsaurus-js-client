@@ -14,10 +14,10 @@
   "sub": true,
   "undef": true,
   "unused": true,
-  "node": true,
-  "browser": false,
+  "node": false,
+  "browser": true,
   "loopfunc": true,
   "globals": {
-    "config": true
+    "io": true
   }
 }
