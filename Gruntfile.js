@@ -32,6 +32,13 @@ module.exports = function(grunt) {
         logConcurrentOutput: false
       },
       lint: ['jshint', 'jscs']
+    },
+    uglify: {
+      my_target: {
+        files: {
+          'client.min.js': ['client.js']
+        }
+      }
     }
   });
 
