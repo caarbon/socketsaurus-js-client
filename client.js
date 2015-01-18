@@ -2,16 +2,20 @@
   var slice = Array.prototype.slice;
   var trailingSlash = /\/$/;
   var beginningDot = /^\/./;
-  var exposedSocketStatuses = [
+  var exposedEventsNoArg = [
     'connect',
     'connecting',
     'disconnect',
     'reconnect',
     'reconnecting'
   ];
-  var exposedSocketErrors = [
+  var exposedEventsWithArg = [
     'connect_failed',
-    'error'
+    'error',
+    'created',
+    'modified',
+    'modification',
+    'removed'
   ];
 
   function Ref(uri, opts, path) {
@@ -33,21 +37,21 @@
     var i;
 
     // exposing some socket.io events
-    for (i = 0; i < exposedSocketStatuses.length; i++) {
-      (function(statusName) {
-        self.socket.on(statusName, function() {
-          notify(statusName);
+    for (i = 0; i < exposedEventsNoArg.length; i++) {
+      (function(eventName) {
+        self.socket.on(eventName, function() {
+          notify(eventName);
         });
-      }(exposedSocketStatuses[i]));
+      }(exposedEventsNoArg[i]));
     }
 
     // exposing some socket.io error events
-    for (i = 0; i < exposedSocketStatuses.length; i++) {
-      (function(errorName) {
-        self.socket.on(errorName, function(err) {
-          notify(errorName, err);
+    for (i = 0; i < exposedEventsWithArg.length; i++) {
+      (function(eventName) {
+        self.socket.on(eventName, function(arg) {
+          notify(eventName, arg);
         });
-      }(exposedSocketErrors[i]));
+      }(exposedEventsWithArg[i]));
     }
 
     if (this.path) {
