@@ -17,7 +17,7 @@
   function Ref(uri, opts, path) {
     var self = this;
     var notation = path.split('.');
-    
+
     this.nsp = notation.shift();
     this.uri = uri;
     this.opts = opts;
@@ -102,6 +102,21 @@
     }
 
     return this;
+  };
+
+  /**
+   * listen to an event one time
+   * @param  {String}   name     Event name to listen to
+   * @param  {Function} callback Callback to use, once
+   * @return {Object}            Connection instance
+   */
+  Ref.prototype.once = function(name, callback) {
+    var self = this;
+
+    this.on(name, function() {
+      callback.apply(this, slice.call(arguments));
+      self.off(name, callback);
+    });
   };
 
   /**

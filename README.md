@@ -52,9 +52,14 @@ ref.on('modification', function(data) {
   console.log(data.doc);
   console.log(data.mod);
 });
+
+// only listens to 'created' once
+ref.once('created', function(doc) {
+  console.log(doc);
+});
 ```
 
-### Methods
+### Additional Methods
 
 You can take any reference and drill into any attribute.
 This will result in a _new_ reference object.
