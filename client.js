@@ -1,6 +1,7 @@
 (function() {
   var slice = Array.prototype.slice;
   var trailingSlash = /\/$/;
+  var beginningDot = /^\/./;
   var exposedSocketStatuses = [
     'connect',
     'connecting',
@@ -16,13 +17,15 @@
   function Ref(uri, opts, path) {
     var self = this;
     var notation = path.split('.');
-    var nsp = notation.shift();
-
-    path = notation.join('.');
+    
+    this.nsp = notation.shift();
+    this.uri = uri;
+    this.opts = opts;
+    this.path = notation.join('.');
 
     this.events = {};
 
-    this.io = io(uri + '/' + nsp, {
+    this.socket = io(uri + '/' + this.nsp, {
       'force new connection': true,
       query: opts
     });
@@ -32,7 +35,7 @@
     // exposing some socket.io events
     for (i = 0; i < exposedSocketStatuses.length; i++) {
       (function(statusName) {
-        this.io.on(statusName, function() {
+        self.socket.on(statusName, function() {
           notify(statusName);
         });
       }(exposedSocketStatuses[i]));
@@ -41,22 +44,26 @@
     // exposing some socket.io error events
     for (i = 0; i < exposedSocketStatuses.length; i++) {
       (function(errorName) {
-        this.io.on(errorName, function(err) {
+        self.socket.on(errorName, function(err) {
           notify(errorName, err);
         });
       }(exposedSocketErrors[i]));
+    }
+
+    if (this.path) {
+      this.socket.emit('child', path);
     }
 
     function notify() {
       var args = slice.call(arguments);
       var name = args.shift();
 
-      if (!this.events[name]) {
+      if (!self.events[name]) {
         return;
       }
 
-      for (var i = 0; i < this.events[name]; i++) {
-        this.events[name][i].apply(self, args);
+      for (var i = 0; i < self.events[name]; i++) {
+        self.events[name][i].apply(self, args);
       }
     }
   }
@@ -97,10 +104,29 @@
     return this;
   };
 
+  /**
+   * utility to listen to only certain attributes
+   * @param  {String} subpath Dot-notated attribute path
+   * @return {Object}         New reference instance
+   */
+  Ref.prototype.child = function(subpath) {
+    subpath = subpath.trim().replace(beginningDot, '');
+    return new Ref(this.uri, this.opts, this.path ? this.path + '.' + subpath : subpath);
+  };
+
+  /**
+   * utility to listen to root
+   * @return {Object}         New reference instance
+   */
+  Ref.prototype.root = function() {
+    return new Ref(this.uri, this.opts);
+  };
+
   function Socketsaurus(uri, opts) {
-    uri = uri.replace(trailingSlash, '');
+    uri = uri.trim().replace(trailingSlash, '');
 
     return function(path) {
+      path = path.trim().replace(beginningDot, '');
       return new Ref(uri, opts, path);
     };
   }
