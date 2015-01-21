@@ -12,5 +12,6 @@
     "grunt-notify": "0.3.1",
     "matchdep": "0.3.0"
   },
+  "main": "./client.js",
   "repository": "git://github.com/caarbon/socketsaurus-js-client"
 }
