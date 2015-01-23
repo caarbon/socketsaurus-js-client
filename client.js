@@ -142,7 +142,7 @@
     return new Ref(this.uri, this.opts);
   };
 
-  function Socketsaurus(uri, opts) {
+  function socketsaurus(uri, opts) {
     uri = uri.trim().replace(trailingSlash, '');
 
     return function(path) {
@@ -153,9 +153,9 @@
 
   if (typeof exports === 'object') {
     // CommonJS
-    module.exports = Socketsaurus;
+    module.exports = socketsaurus;
   } else {
     // browser global
-    window.Socketsaurus = Socketsaurus;
+    window.socketsaurus = socketsaurus;
   }
 }());
