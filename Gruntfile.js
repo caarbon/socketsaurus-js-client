@@ -9,7 +9,8 @@ module.exports = function(grunt) {
           '**/*.js',
           '!node_modules/**',
           '!ignore/**',
-          '!Gruntfile.js'
+          '!Gruntfile.js',
+          '!client.min.js'
         ],
         options: {
           jshintrc: true
@@ -21,7 +22,8 @@ module.exports = function(grunt) {
         '**/*.js',
         '!node_modules/**',
         '!ignore/**',
-        '!Gruntfile.js'
+        '!Gruntfile.js',
+        '!client.min.js'
       ],
       options: {
         config: '.jscsrc'

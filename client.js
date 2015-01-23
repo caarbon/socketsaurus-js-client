@@ -142,7 +142,7 @@
     return new Ref(this.uri, this.opts);
   };
 
-  function Socketsaurus(uri, opts) {
+  function socketsaurus(uri, opts) {
     uri = uri.trim().replace(trailingSlash, '');
 
     return function(path) {
@@ -151,5 +151,5 @@
     };
   }
 
-  window.Socketsaurus = Socketsaurus;
+  window.socketsaurus = socketsaurus;
 }());
