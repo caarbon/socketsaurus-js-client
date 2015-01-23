@@ -151,5 +151,11 @@
     };
   }
 
-  window.socketsaurus = socketsaurus;
+  if (typeof exports === 'object') {
+    // CommonJS
+    module.exports = socketsaurus;
+  } else {
+    // browser global
+    window.socketsaurus = socketsaurus;
+  }
 }());
