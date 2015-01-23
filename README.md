@@ -8,13 +8,13 @@ First call Socketsaurus with a base URI you will be connecting to.
 It will return a function which you can use to listen to various collections.
 
 ```js
-var Socket = Socketsaurus('http://localhost:3000');
+var socket = socketsaurus('http://localhost:3000');
 ```
 
 If you need to pass handshake attributes (for auth) you can do so here.
 
 ```js
-var Socket = Socketsaurus('http://localhost:3000', {
+var socket = socketsaurus('http://localhost:3000', {
   token: 'a5079cc66918f780d51ce0035ebe24d9',
   signature: '810d917029606be28cb30ab8f00e6202'
 });
@@ -25,7 +25,7 @@ var Socket = Socketsaurus('http://localhost:3000', {
 You can now create some references to collections in MongoDb.
 
 ```js
-var ref = Socket('customers');
+var ref = socket('customers');
 
 ref.on('error', function(err) {
   console.log(err);
@@ -65,7 +65,7 @@ You can take any reference and drill into any attribute.
 This will result in a _new_ reference object.
 
 ```js
-var carsRef = Socket('cars');                 // listening to cars
+var carsRef = socket('cars');                 // listening to cars
 
 var locationRef = carsRef.child('location');  // listening to cars.location
 
@@ -78,7 +78,7 @@ You can also move back to root.
 This will result in a _new_ reference object.
 
 ```js
-var latRef = Socket('cars.location.lat');     // listening to cars.location.lat
+var latRef = socket('cars.location.lat');     // listening to cars.location.lat
 
 var carsRef = latRef.root();                  // listening to cars
 ```
