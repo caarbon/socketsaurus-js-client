@@ -1,7 +1,7 @@
 {
   "name": "Socketsaurus_JS_Client",
   "description": "JavaScript client for Socketsaurus",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "dependencies": {},
   "devDependencies": {
     "grunt": "0.4.5",
