@@ -13,5 +13,9 @@
     "matchdep": "0.3.0"
   },
   "main": "./client.js",
-  "repository": "git://github.com/caarbon/socketsaurus-js-client"
+  "homepage": "https://github.com/caarbon/socketsaurus-js-client",
+  "repository": "git://github.com/caarbon/socketsaurus-js-client",
+  "bugs": "https://github.com/caarbon/socketsaurus-js-client/issues",
+  "license": "ISC",
+  "keywords": ["socket", "events", "oplog", "mongodb", "mongoose", "client"]
 }
