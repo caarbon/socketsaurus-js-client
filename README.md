@@ -2,6 +2,12 @@
 
 ![Hello World](./readme_images/rawr.gif)
 
+## NPM
+
+```
+npm install socketsaurus_js_client
+```
+
 ## Usage
 
 First call Socketsaurus with a base URI you will be connecting to.
