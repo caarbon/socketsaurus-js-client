@@ -1,5 +1,5 @@
 {
-  "name": "Socketsaurus_JS_Client",
+  "name": "socketsaurus_js_client",
   "description": "JavaScript client for Socketsaurus",
   "version": "0.0.1",
   "dependencies": {},
