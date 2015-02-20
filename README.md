@@ -2,6 +2,8 @@
 
 ![Hello World](./readme_images/rawr.gif)
 
+[![Circle CI](https://circleci.com/gh/caarbon/socketsaurus-js-client.svg?style=svg)](https://circleci.com/gh/caarbon/socketsaurus-js-client)
+
 ## NPM
 
 ```
