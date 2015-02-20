@@ -2,6 +2,9 @@
   "name": "socketsaurus_js_client",
   "description": "JavaScript client for Socketsaurus",
   "version": "0.0.1",
+  "scripts": {
+    "test": "grunt lint"
+  },
   "dependencies": {},
   "devDependencies": {
     "grunt": "0.4.5",
