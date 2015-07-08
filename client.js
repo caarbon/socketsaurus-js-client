@@ -122,6 +122,8 @@
       callback.apply(this, slice.call(arguments));
       self.off(name, callback);
     });
+
+    return this;
   };
 
   /**
@@ -147,6 +149,7 @@
    */
   Ref.prototype.conditionals = function(conditionals) {
     this.socket.emit('conditionals', conditionals);
+    return this;
   };
 
   /**
@@ -154,6 +157,7 @@
    */
   Ref.prototype.clearConditionals = function() {
     this.socket.emit('clear-conditionals');
+    return this;
   };
 
   function socketsaurus(uri, opts) {
