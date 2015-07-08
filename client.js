@@ -56,7 +56,7 @@
     }
 
     if (this.path) {
-      this.socket.emit('child', path);
+      this.socket.emit('child', this.path);
     }
 
     function notify() {
@@ -131,7 +131,7 @@
    */
   Ref.prototype.child = function(subpath) {
     subpath = subpath.trim().replace(leadingDot, '');
-    return new Ref(this.uri, this.opts, this.path ? this.path + '.' + subpath : subpath);
+    return new Ref(this.uri, this.opts, this.nsp + '.' + (this.path ? this.path + '.' + subpath : subpath));
   };
 
   /**
