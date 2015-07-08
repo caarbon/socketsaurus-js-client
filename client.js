@@ -142,6 +142,20 @@
     return new Ref(this.uri, this.opts);
   };
 
+  /**
+   * add conditionals to filter events with
+   */
+  Ref.prototype.conditionals = function(conditionals) {
+    this.socket.emit('conditionals', conditionals);
+  };
+
+  /**
+   * clears conditionals on the current ref
+   */
+  Ref.prototype.clearConditionals = function() {
+    this.socket.emit('clear-conditionals');
+  };
+
   function socketsaurus(uri, opts) {
     uri = uri.trim().replace(trailingSlash, '');
 
