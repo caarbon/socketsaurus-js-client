@@ -89,6 +89,25 @@ var latRef = socket('cars.location.lat');     // listening to cars.location.lat
 var carsRef = latRef.root();                  // listening to cars
 ```
 
+If you need to filter inbound events, then you can add conditionals to check against.
+
+```js
+userRef.conditionals({
+  first_name: 'tim',
+  state: {
+    online: true
+  }
+});
+
+// appends conditionals to existing
+userRef.conditionals({
+  last_name: 'marshall'
+});
+
+// clears all conditionals
+userRef.clearConditionals();
+```
+
 ## Lint
 
 To lint the code, first `npm install` the dev dependencies, and then run `grunt lint`.

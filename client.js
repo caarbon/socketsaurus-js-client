@@ -56,7 +56,7 @@
     }
 
     if (this.path) {
-      this.socket.emit('child', path);
+      this.socket.emit('child', this.path);
     }
 
     function notify() {
@@ -122,6 +122,8 @@
       callback.apply(this, slice.call(arguments));
       self.off(name, callback);
     });
+
+    return this;
   };
 
   /**
@@ -131,7 +133,7 @@
    */
   Ref.prototype.child = function(subpath) {
     subpath = subpath.trim().replace(leadingDot, '');
-    return new Ref(this.uri, this.opts, this.path ? this.path + '.' + subpath : subpath);
+    return new Ref(this.uri, this.opts, this.nsp + '.' + (this.path ? this.path + '.' + subpath : subpath));
   };
 
   /**
@@ -140,6 +142,22 @@
    */
   Ref.prototype.root = function() {
     return new Ref(this.uri, this.opts);
+  };
+
+  /**
+   * add conditionals to filter events with
+   */
+  Ref.prototype.conditionals = function(conditionals) {
+    this.socket.emit('conditionals', conditionals);
+    return this;
+  };
+
+  /**
+   * clears conditionals on the current ref
+   */
+  Ref.prototype.clearConditionals = function() {
+    this.socket.emit('clear-conditionals');
+    return this;
   };
 
   function socketsaurus(uri, opts) {

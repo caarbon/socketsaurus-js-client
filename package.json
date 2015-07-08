@@ -1,7 +1,7 @@
 {
   "name": "socketsaurus_js_client",
   "description": "JavaScript client for Socketsaurus",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "scripts": {
     "test": "grunt lint"
   },
@@ -15,7 +15,7 @@
     "grunt-notify": "0.3.1",
     "matchdep": "0.3.0"
   },
-  "main": "./client.js",
+  "main": "./client.min.js",
   "homepage": "https://github.com/caarbon/socketsaurus-js-client",
   "repository": "git://github.com/caarbon/socketsaurus-js-client",
   "bugs": "https://github.com/caarbon/socketsaurus-js-client/issues",
