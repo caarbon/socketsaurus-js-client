@@ -108,6 +108,19 @@ userRef.conditionals({
 userRef.clearConditionals();
 ```
 
+If you need to remove listeners for an event:
+
+```js
+ref.off('created', func);
+```
+
+or
+
+```js
+ref.off('created')
+```
+
+You may pass the original function to prevent the event from triggering, or pass no function and remove all functions associated to that event.
 ## Lint
 
 To lint the code, first `npm install` the dev dependencies, and then run `grunt lint`.
