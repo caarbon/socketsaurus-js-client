@@ -102,7 +102,7 @@
       this.events[name].splice(idx, 1);
     }
 
-    if (this.events[name].length === 0) {
+    if (this.events[name].length === 0 || !callback) {
       delete this.events[name];
     }
 
